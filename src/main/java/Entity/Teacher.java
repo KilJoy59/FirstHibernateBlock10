@@ -1,6 +1,7 @@
 package Entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Project FirstHibernate
@@ -23,6 +24,9 @@ public class Teacher {
 
     @Column(name = "age")
     private int age;
+
+    @OneToMany(mappedBy = "teacher")
+    private List<Course> courses;
 
     public Teacher() {
     }
@@ -57,5 +61,13 @@ public class Teacher {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

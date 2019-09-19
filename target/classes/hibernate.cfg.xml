@@ -21,5 +21,8 @@
 
         <mapping class="Entity.Course"/>
         <mapping class="Entity.Teacher"/>
+        <mapping class="Entity.Student"/>
+        <mapping class="Entity.Subscription"/>
+        <mapping class="Entity.SubscriptionKey"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,7 +1,9 @@
-import Entity.Course;
-import Entity.Teacher;
+import Entity.*;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
+
+import java.util.List;
 
 /**
  * Project FirstHibernate
@@ -10,24 +12,21 @@ import util.HibernateUtil;
 public class Main {
     public static void main(String[] args) {
         Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
 
         Course course = session.get(Course.class,1);
-        System.out.println( "id курса - " + course.getId());
-        System.out.println("курс - " + course.getName());
-        System.out.println("описание -  " + course.getDescription());
-        System.out.println("продолжительность - " + course.getDuration());
-        System.out.println("id учителя - " + course.getTeacherId());
-        System.out.println("типа курса - " + course.getType());
-        System.out.println("кол-во учеников - " + course.getStudentsCount());
-        System.out.println("цена - " + course.getPrice());
-        System.out.println("цена за час - " + course.getPricePerHour() + "\n");
+        List<Student> studentList = course.getStudents();
+        studentList.forEach(System.out::println);
 
         Teacher teacher = session.get(Teacher.class, 2);
-        System.out.println("id учителя - " + teacher.getId());
-        System.out.println("Имя учителя -" + teacher.getName());
-        System.out.println("Возраст учителя - " + teacher.getAge());
-        System.out.println("Зарплата - " + teacher.getSalary() + "\n");
+        List<Course> courseList = teacher.getCourses();
+        courseList.forEach(System.out::println);
 
+        SubscriptionKey subscriptionKey = session.get(SubscriptionKey.class,1);
+        Subscription subscription = session.get(Subscription.class,subscriptionKey );
+        System.out.println(subscription.getKey().getCourse());
+
+        transaction.commit();
         session.close();
         HibernateUtil.shutdown();
     }
