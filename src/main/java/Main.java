@@ -14,7 +14,9 @@ public class Main {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
-        Course course = session.get(Course.class,1);
+        Student student = session.get(Student.class,1);
+
+        Course course = session.get(Course.class,10);
         List<Student> studentList = course.getStudents();
         studentList.forEach(System.out::println);
 
@@ -22,9 +24,12 @@ public class Main {
         List<Course> courseList = teacher.getCourses();
         courseList.forEach(System.out::println);
 
-        SubscriptionKey subscriptionKey = session.get(SubscriptionKey.class,1);
-        Subscription subscription = session.get(Subscription.class,subscriptionKey );
+        SubscriptionKey subscriptionKey = new SubscriptionKey(student ,course);
+        Subscription subscription = session.get(Subscription.class, subscriptionKey );
+        System.out.println(subscription.getSubscriptionDate());
         System.out.println(subscription.getKey().getCourse());
+        System.out.println(subscription.getKey().getStudent());
+
 
         transaction.commit();
         session.close();

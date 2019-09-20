@@ -22,6 +22,11 @@ public class SubscriptionKey implements Serializable {
     public SubscriptionKey() {
     }
 
+    public SubscriptionKey(Student student, Course course) {
+        this.student = student;
+        this.course = course;
+    }
+
     public Student getStudent() {
         return student;
     }

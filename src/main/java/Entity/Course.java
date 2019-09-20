@@ -32,7 +32,7 @@ public class Course {
     @ManyToOne(cascade = CascadeType.ALL)
     private Teacher teacher;
 
-    @Column(name = "students_count")
+    @Column(name = "students_count", nullable = true)
     private Integer studentsCount;
 
     @Column(name = "price")
