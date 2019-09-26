@@ -9,7 +9,7 @@ import java.util.Objects;
  * Created by End on сент., 2019
  */
 @Embeddable
-public class SubscriptionKey implements Serializable {
+public class CompositeKey implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
@@ -19,10 +19,10 @@ public class SubscriptionKey implements Serializable {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    public SubscriptionKey() {
+    public CompositeKey() {
     }
 
-    public SubscriptionKey(Student student, Course course) {
+    public CompositeKey(Student student, Course course) {
         this.student = student;
         this.course = course;
     }
@@ -46,8 +46,8 @@ public class SubscriptionKey implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SubscriptionKey)) return false;
-        SubscriptionKey that = (SubscriptionKey) o;
+        if (!(o instanceof CompositeKey)) return false;
+        CompositeKey that = (CompositeKey) o;
         return student.equals(that.student) &&
                 course.equals(that.course);
     }

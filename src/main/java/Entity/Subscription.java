@@ -13,7 +13,7 @@ import java.util.Date;
 public class Subscription implements Serializable {
 
     @EmbeddedId
-    private SubscriptionKey key;
+    private CompositeKey key;
 
     public Subscription() {
     }
@@ -21,11 +21,11 @@ public class Subscription implements Serializable {
     @Column(name = "subscription_date")
     private Date subscriptionDate;
 
-    public SubscriptionKey getKey() {
+    public CompositeKey getKey() {
         return key;
     }
 
-    public void setKey(SubscriptionKey key) {
+    public void setKey(CompositeKey key) {
         this.key = key;
     }
 
